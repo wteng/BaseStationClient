@@ -14,7 +14,49 @@
     tools:showIn="@layout/activity_main">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:gravity="center"
+        android:text="潍坊电信基站信息采集系统"
+        android:textColor="#c3c300"
+        android:textSize="50px"
+        />
+
+    <Button
+        android:id="@+id/record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="信息录入"
+        android:gravity="center"
+        android:background="#00ff00"
+        android:layout_margin="30dp"
+        android:layout_below="@+id/title"
+
+        />
+
+    <Button
+        android:id="@+id/query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="信息查询"
+        android:gravity="center"
+        android:background="#00ff00"
+        android:layout_margin="30dp"
+        android:layout_below="@+id/record"
+        />
+
+    <Button
+        android:id="@+id/modify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="信息修改"
+        android:gravity="center"
+        android:background="#00ff00"
+        android:layout_margin="30dp"
+        android:layout_below="@+id/query"
+        />
+
+
+
 </RelativeLayout>
