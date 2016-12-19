@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,45 +7,195 @@
     android:fitsSystemWindows="true"
     tools:context="com.wt.basestationclient.RecordScrollingActivity">
 
-    <!--<include layout="@layout/content_record_scrolling"/>-->
-    <TextView
-        android:id="@+id/recordTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="信息录入"
-        android:textColor="#c3c300"
-        android:textSize="50px"
-        />
 
     <LinearLayout
-        android:id="@+id/recordStationName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/recordTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="基站名称："
+            android:text="信息录入"
             android:textColor="#c3c300"
             android:textSize="50px"
             />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
+        <LinearLayout
+            android:id="@+id/recordStationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="基站名称："
+                android:textColor="#c3c300"
+                android:textSize="50px"
+                />
+
+            <EditText
+                android:id="@+id/ed_station_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="基站县区："
+                android:textColor="#c3c300"
+                android:textSize="50px"
+                />
+
+            <EditText
+                android:id="@+id/ed_station_name_qu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recordStationAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="基站具体地址："
+                android:textColor="#c3c300"
+                android:textSize="50px"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="经度："
+                android:textColor="#c3c300"
+                android:textSize="50px"
+                />
+            <EditText
+                android:id="@+id/recordLatitudeET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="纬度："
+                android:textColor="#c3c300"
+                android:textSize="50px"
+                />
+            <EditText
+                android:id="@+id/recordLongtitudeET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="基站平台个数："
+                android:textColor="#c3c300"
+                android:textSize="50px"
+                />
+            <EditText
+                android:id="@+id/recordPlatNumET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="天线所在平台："
+                android:textColor="#c3c300"
+                android:textSize="50px"
+                />
+            <EditText
+                android:id="@+id/recordTianxianPlatET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开始录入"
+            android:gravity="center"
+            android:background="#00ff00"
+            android:layout_margin="15dp"
+            />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/record"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="开始录入"
-        android:gravity="center"
-        android:background="#00ff00"
-        android:layout_margin="30dp"
-        android:layout_below="@+id/recordStationName"
-        />
 
-</RelativeLayout>
+</ScrollView>
