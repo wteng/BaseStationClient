@@ -79,6 +79,40 @@
         android:layout_below="@+id/query"
         />
 
+    <LinearLayout
+        android:id="@+id/serverInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/modify"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="服务器："
+            android:textColor="#c3c300"
+            android:textSize="50px"
+            />
+        <EditText
+            android:id="@+id/server_info_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/set_server_info_btn"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            android:background="#00ff00"
+            />
+
+    </LinearLayout>
+
 
 
 </RelativeLayout>

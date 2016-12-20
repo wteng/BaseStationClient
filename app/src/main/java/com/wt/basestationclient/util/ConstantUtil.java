@@ -5,7 +5,8 @@ package com.wt.basestationclient.util;
  */
 public class ConstantUtil {
 
-    public static final String REQUEST_URL = "http://192.168.31.65:8080/";
+//    public static final String REQUEST_URL = "http://192.168.31.65:8080/";
+    public static String REQUEST_URL = null;
 
 
 }
