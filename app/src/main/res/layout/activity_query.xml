@@ -15,17 +15,17 @@
         >
 
         <TextView
-            android:id="@+id/recordTitle"
+            android:id="@+id/queryTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="信息录入"
+            android:text="信息查询"
             android:textColor="#c3c300"
             android:textSize="50px"
             />
 
         <LinearLayout
-            android:id="@+id/recordStationName"
+            android:id="@+id/queryStationName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp">
@@ -40,7 +40,7 @@
                 />
 
             <EditText
-                android:id="@+id/ed_station_name"
+                android:id="@+id/ed_query_station_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
@@ -72,7 +72,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/recordStationAddress"
+            android:id="@+id/queryStationAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -87,9 +87,11 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordStationAddressET"
+                android:id="@+id/queryStationAddressET"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:editable="false"
+                />
 
         </LinearLayout>
 
@@ -109,7 +111,7 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordLatitudeET"
+                android:id="@+id/queryLatitudeET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
@@ -133,7 +135,7 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordLongtitudeET"
+                android:id="@+id/queryLongtitudeET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
@@ -158,7 +160,7 @@
                 />
 
             <NumberPicker
-                android:id="@+id/recordPlatNumNP"
+                android:id="@+id/queryPlatNumNP"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 ></NumberPicker>
@@ -182,9 +184,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordTianxianPlatET"
+                android:id="@+id/queryTianxianPlatET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -205,9 +208,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordFangweijiaoET"
+                android:id="@+id/queryFangweijiaoET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -228,9 +232,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordJixieXQJET"
+                android:id="@+id/queryJixieXQJET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -251,9 +256,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordDianziXQJET"
+                android:id="@+id/queryDianziXQJET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -274,9 +280,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordStationHeightET"
+                android:id="@+id/queryStationHeightET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -297,29 +304,30 @@
                 android:textSize="50px"
                 />
 
-                <RadioGroup
-                    android:id="@+id/beautTianxianRG"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+            <RadioGroup
+                android:id="@+id/beautTianxianRG"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
 
-                        <RadioButton
-                            android:id="@+id/beautTianxianRBY"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="是"
-                            android:checked="true"
-                            android:layout_weight="1"/>
+                <RadioButton
+                    android:id="@+id/beautTianxianRBY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="是"
+                    android:checked="true"
+                    android:layout_weight="1"
+                    android:editable="false"/>
 
-                        <RadioButton
-                            android:id="@+id/beautTianxianRBN"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="否" />
+                <RadioButton
+                    android:id="@+id/beautTianxianRBN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="否" />
 
 
-                </RadioGroup>
+            </RadioGroup>
 
         </LinearLayout>
 
@@ -339,7 +347,7 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordTianxianTypeET"
+                android:id="@+id/queryTianxianTypeET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -362,9 +370,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordFloorET"
+                android:id="@+id/queryFloorET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -385,9 +394,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordTianxianCJET"
+                android:id="@+id/queryTianxianCJET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -408,9 +418,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordTianxianModelET"
+                android:id="@+id/queryTianxianModelET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -431,9 +442,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordRRULocationET"
+                android:id="@+id/queryRRULocationET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -495,9 +507,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordCNetModelET"
+                android:id="@+id/queryCNetModelET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -519,28 +532,14 @@
                 android:textSize="50px"
                 />
 
-            <RadioGroup
-                android:id="@+id/hasFartherRG"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/hasFartherRBY"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="是"
-                    android:checked="true"
-                    android:layout_weight="1"/>
-
-                <RadioButton
-                    android:id="@+id/hasFartherRBN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="否" />
-
-            </RadioGroup>
+            <TextView
+                android:id="@+id/hasFartherTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="是"
+                android:textSize="50px"
+                />
 
         </LinearLayout>
 
@@ -560,28 +559,14 @@
                 android:textSize="50px"
                 />
 
-            <RadioGroup
-                android:id="@+id/hasRoomShareRG"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/hasRoomShareRBY"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="是"
-                    android:checked="true"
-                    android:layout_weight="1"/>
-
-                <RadioButton
-                    android:id="@+id/hasRoomShareRBN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="否" />
-
-            </RadioGroup>
+            <TextView
+                android:id="@+id/hasRoomShareTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="是"
+                android:textSize="50px"
+                />
 
         </LinearLayout>
 
@@ -600,29 +585,14 @@
                 android:textColor="#c3c300"
                 android:textSize="50px"
                 />
-
-            <RadioGroup
-                android:id="@+id/hasAirConditionRG"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/hasAirConditionRBY"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="是"
-                    android:checked="true"
-                    android:layout_weight="1"/>
-
-                <RadioButton
-                    android:id="@+id/hasAirConditionRBN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="否" />
-
-            </RadioGroup>
+            <TextView
+                android:id="@+id/hasAirconditionTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="是"
+                android:textSize="50px"
+                />
 
 
         </LinearLayout>
@@ -642,29 +612,15 @@
                 android:textColor="#c3c300"
                 android:textSize="50px"
                 />
-            <RadioGroup
-                android:id="@+id/hasBatteryRG"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
 
-                <RadioButton
-                    android:id="@+id/hasBatteryRBY"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="是"
-                    android:checked="true"
-                    android:layout_weight="1"/>
-
-                <RadioButton
-                    android:id="@+id/hasBatteryRBN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="否" />
-
-            </RadioGroup>
-
+            <TextView
+                android:id="@+id/hasBatteryTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="是"
+                android:textSize="50px"
+                />
 
         </LinearLayout>
 
@@ -684,9 +640,10 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordQuestionET"
+                android:id="@+id/queryQuestionET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
@@ -707,23 +664,14 @@
                 android:textSize="50px"
                 />
             <EditText
-                android:id="@+id/recordImgET"
+                android:id="@+id/queryImgET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 />
 
         </LinearLayout>
 
-
-        <Button
-            android:id="@+id/recordBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="开始录入"
-            android:gravity="center"
-            android:background="#00ff00"
-            android:layout_margin="15dp"
-            />
     </LinearLayout>
 
 

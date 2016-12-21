@@ -10,7 +10,11 @@ public class LogUtil {
     public static final String LOG_NAME = "wtlog";
 
     public static void i(String msg) {
-        Log.i(LOG_NAME,msg);
+        if (msg == null) {
+            Log.i(LOG_NAME, "null");
+            return;
+        }
+        Log.i(LOG_NAME, msg);
     }
 
 }

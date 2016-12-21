@@ -23,21 +23,62 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog = null;
     EditText serverInfoET = null;
+    EditText stationNameET = null;
     Button settingBtn = null;
+    Button recordBtn = null;
+    Button queryBtn = null;
+    Button modifyBtn = null;
+
+    Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            selfHandleMessage(msg);
+        }
+    };
+
+    public void selfHandleMessage(Message msg) {
+        if (msg.what == -2) {
+            Toast.makeText(MainActivity.this,"服务器端出错，请联系管理员",Toast.LENGTH_SHORT).show();
+        } else if (msg.what == -1) {
+            Toast.makeText(MainActivity.this, "请求超时，请重试！", Toast.LENGTH_SHORT).show();
+        } else if (msg.what == 1) {
+            progressDialog.dismiss();
+            if (msg.arg1 == ConstantUtil.RECORD_BUTTON_ID) {
+                String stationName = msg.obj.toString();
+                Intent intent = new Intent(MainActivity.this, RecordScrollingActivity.class);
+                intent.putExtra("stationName", stationName);
+                startActivity(intent);
+            } else if (msg.arg1 == ConstantUtil.QUERY_BUTTON_ID) {
+                Toast.makeText(MainActivity.this,"该基站不存在，请点击信息录入按钮！！！",Toast.LENGTH_SHORT).show();
+            } else if (msg.arg1 == ConstantUtil.MODIFY_BUTTON_ID) {
+                Toast.makeText(MainActivity.this,"该基站不存在，请点击信息录入按钮！！！",Toast.LENGTH_SHORT).show();
+            }
+
+        } else if (msg.what == 2) {
+            progressDialog.dismiss();
+            if (msg.arg1 == ConstantUtil.RECORD_BUTTON_ID) {
+                Toast.makeText(MainActivity.this,"该基站已经存在，请点击信息查询按钮或信息修改按钮！！！",Toast.LENGTH_SHORT).show();
+            } else if (msg.arg1 == ConstantUtil.QUERY_BUTTON_ID) {
+                Intent intent = new Intent(MainActivity.this, QueryActivity.class);
+                intent.putExtra("bodyStr", msg.obj.toString());
+                startActivity(intent);
+            } else if (msg.arg1 == ConstantUtil.MODIFY_BUTTON_ID) {
+                Intent intent = new Intent(MainActivity.this, ModifyActivity.class);
+                intent.putExtra("bodyStr", msg.obj.toString());
+                startActivity(intent);
+            }
+
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button recordBtn = (Button) findViewById(R.id.record);
-        Button queryBtn = (Button) findViewById(R.id.query);
-        Button modifyBtn = (Button) findViewById(R.id.modify);
-        progressDialog = new ProgressDialog(this);
-        serverInfoET = (EditText) findViewById(R.id.server_info_edit);
-        settingBtn = (Button) findViewById(R.id.set_server_info_btn);
-
-        final EditText editText = (EditText) findViewById(R.id.main_station_edit);
+        initComponent();
 
         //查看服务器是否已经设置
         final SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
@@ -47,95 +88,30 @@ public class MainActivity extends AppCompatActivity {
             ConstantUtil.REQUEST_URL = serverInfo;
         }
 
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
 
-                if (msg.what == -2) {
-                    Toast.makeText(MainActivity.this,"服务器端出错，请联系管理员",Toast.LENGTH_SHORT).show();
-                } else if (msg.what == -1) {
-                    Toast.makeText(MainActivity.this, "请求超时，请重试！", Toast.LENGTH_SHORT).show();
-                } else if (msg.what == 1) {
-                    progressDialog.dismiss();
-                    String stationName = msg.obj.toString();
-                    Intent intent = new Intent(MainActivity.this, RecordScrollingActivity.class);
-                    intent.putExtra("stationName", stationName);
-                    startActivity(intent);
-                }
-
-
-            }
-        };
 
         recordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (!checkServerInfo()) {
-                    Toast.makeText(MainActivity.this, "请先设置服务器信息！", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                final String stationName = editText.getText().toString().trim();
-
-                if (stationName.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "请输入基站名称", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressDialog.setMessage("正在努力的加载中。。");
-                progressDialog.setCancelable(true);
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
-
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        String url = ConstantUtil.REQUEST_URL + "/getStationInfoByName?stationName=" + stationName;
-                        String httpResult = HttpUtil.doGet(url);
-                        LogUtil.i(httpResult);
-                        if (httpResult == null) {
-                            progressDialog.dismiss();
-                            handler.sendEmptyMessage(-1);
-                            return;
-                        }
-
-                        JSONObject jsonObject = JSON.parseObject(httpResult);
-                        if (jsonObject.getIntValue("retcode") != 0) {
-                            handler.sendEmptyMessage(-2);
-                            return;
-                        }
-
-                        Object bodyObject = jsonObject.get("body");
-                        if (bodyObject == null) {
-                            Message message = new Message();
-                            message.what = 1;
-                            message.obj = stationName;
-                            handler.sendMessage(message);
-                        }
-
-                    }
-                }).start();
-
-
+                onButtonDown(ConstantUtil.RECORD_BUTTON_ID);
             }
         });
 
         queryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onButtonDown(ConstantUtil.QUERY_BUTTON_ID);
             }
         });
 
         modifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
+                onButtonDown(ConstantUtil.MODIFY_BUTTON_ID);
+
+                //预留的登录按钮
+//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -155,9 +131,78 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void initComponent() {
+        recordBtn = (Button) findViewById(R.id.record);
+        queryBtn = (Button) findViewById(R.id.query);
+        modifyBtn = (Button) findViewById(R.id.modify);
+        progressDialog = new ProgressDialog(this);
+        serverInfoET = (EditText) findViewById(R.id.server_info_edit);
+        settingBtn = (Button) findViewById(R.id.set_server_info_btn);
+
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("正在努力的加载中。。");
+        progressDialog.setCancelable(true);
+        progressDialog.setCanceledOnTouchOutside(false);
+
+        stationNameET = (EditText) findViewById(R.id.main_station_edit);
+    }
+
+    public void onButtonDown(final int buttonId) {
+
+        if (!checkServerInfo()) {
+            Toast.makeText(MainActivity.this, "请先设置服务器信息！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final String stationName = stationNameET.getText().toString().trim();
+
+        if (stationName.isEmpty()) {
+            Toast.makeText(MainActivity.this, "请输入基站名称", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
+        progressDialog.show();
 
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                String url = ConstantUtil.REQUEST_URL + "/getStationInfoByName?stationName=" + stationName;
+                String httpResult = HttpUtil.doGet(url);
+                LogUtil.i(httpResult);
+                if (httpResult == null) {
+                    progressDialog.dismiss();
+                    handler.sendEmptyMessage(-1);
+                    return;
+                }
+
+                JSONObject jsonObject = JSON.parseObject(httpResult);
+                if (jsonObject.getIntValue("retcode") != 0) {
+                    handler.sendEmptyMessage(-2);
+                    return;
+                }
+
+                Object bodyObject = jsonObject.get("body");
+                if (bodyObject == null) {
+                    Message message = new Message();
+                    message.what = 1;
+                    message.arg1 = buttonId;
+                    message.obj = stationName;
+                    handler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.what = 2;
+                    message.obj = bodyObject;
+                    message.arg1 = buttonId;
+                    handler.sendMessage(message);
+                }
+
+            }
+        }).start();
 
     }
 

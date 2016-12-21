@@ -42,7 +42,6 @@ public class HttpUtil {
             HttpResponse httpResponse = androidHttpClient.execute(httpGet,basicHttpContext);
             HttpEntity httpEntity = httpResponse.getEntity();
             String httpResult = EntityUtils.toString(httpEntity);
-            LogUtil.i(httpResult);
             return httpResult;
         } catch (IOException e) {
             e.printStackTrace();
